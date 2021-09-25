@@ -1,8 +1,82 @@
 const Ziggy = {
-  url: 'https://www.zhitiantu.com',
+  url: 'http://localhost',
   port: null,
   defaults: {},
   routes: {
+    'filament.asset': { uri: 'admin/assets/{path}', methods: ['GET', 'HEAD'] },
+    'filament.auth.login': { uri: 'admin/login', methods: ['GET', 'HEAD'] },
+    'filament.auth.password.request': {
+      uri: 'admin/forgot-password',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.auth.password.reset': {
+      uri: 'admin/reset-password/{token}',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.image': { uri: 'admin/image/{path}', methods: ['GET', 'HEAD'] },
+    'filament.dashboard': { uri: 'admin', methods: ['GET', 'HEAD'] },
+    'filament.account': { uri: 'admin/account', methods: ['GET', 'HEAD'] },
+    'filament.form-attachments.upload': {
+      uri: 'admin/form-attachments',
+      methods: ['POST'],
+    },
+    'filament.resources.collects.index': {
+      uri: 'admin/resources/collects',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.resources.collects.create': {
+      uri: 'admin/resources/collects/create',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.resources.collects.edit': {
+      uri: 'admin/resources/collects/{record}/edit',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.resources.comments.index': {
+      uri: 'admin/resources/comments',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.resources.comments.create': {
+      uri: 'admin/resources/comments/create',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.resources.comments.edit': {
+      uri: 'admin/resources/comments/{record}/edit',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.resources.pictures.index': {
+      uri: 'admin/resources/pictures',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.resources.pictures.create': {
+      uri: 'admin/resources/pictures/create',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.resources.pictures.edit': {
+      uri: 'admin/resources/pictures/{record}/edit',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.resources.users.index': {
+      uri: 'admin/resources/users',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.resources.users.create': {
+      uri: 'admin/resources/users/create',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.resources.users.edit': {
+      uri: 'admin/resources/users/{record}/edit',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.users.index': { uri: 'admin/users', methods: ['GET', 'HEAD'] },
+    'filament.users.create': {
+      uri: 'admin/users/create',
+      methods: ['GET', 'HEAD'],
+    },
+    'filament.users.edit': {
+      uri: 'admin/users/{record}/edit',
+      methods: ['GET', 'HEAD'],
+    },
     login: { uri: 'login', methods: ['GET', 'HEAD'] },
     logout: { uri: 'logout', methods: ['POST'] },
     'password.email': { uri: 'forgot-password', methods: ['POST'] },
@@ -33,6 +107,12 @@ const Ziggy = {
       methods: ['GET', 'HEAD'],
     },
     telescope: { uri: 'telescope/{view?}', methods: ['GET', 'HEAD'] },
+    'livewire.message': { uri: 'livewire/message/{name}', methods: ['POST'] },
+    'livewire.upload-file': { uri: 'livewire/upload-file', methods: ['POST'] },
+    'livewire.preview-file': {
+      uri: 'livewire/preview-file/{filename}',
+      methods: ['GET', 'HEAD'],
+    },
     'pictures.store': {
       uri: 'api/pictures',
       methods: ['POST'],
@@ -145,12 +225,18 @@ const Ziggy = {
       methods: ['GET', 'HEAD'],
       bindings: { collect: 'id' },
     },
+    'user.dashboard': { uri: 'dashboard', methods: ['GET', 'HEAD'] },
+    'user.profile.update': { uri: 'user/{user}/profile', methods: ['PUT'] },
     'user.collects.index': {
       uri: 'user/{user}/collects',
       methods: ['GET', 'HEAD'],
+      bindings: { collect: 'id' },
     },
   },
 }
-'undefined' != typeof window &&
-  void 0 !== window.Ziggy &&
+
+if (typeof window !== 'undefined' && typeof window.Ziggy !== 'undefined') {
   Object.assign(Ziggy.routes, window.Ziggy.routes)
+}
+
+export { Ziggy }
